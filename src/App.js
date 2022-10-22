@@ -32,9 +32,8 @@ function App() {
     
   return (
     <div className='bg'>
-      <code>address: {address}</code>
-      <h1>Collect your fair airdrop</h1>
-      <Step title='Step 1: Download Holonym Extension' complete={true}>
+      <h1>Collect your airdrop{address ? `,   ${address.slice(0,6)}...${address.slice(-2)}` : null}</h1>
+      <Step title='Step 1: Download the Holonym Extension' complete={true}>
       <a target='_blank' className='step button' href='https://chrome.google.com/webstore/detail/holonym/obhgknpelgngeabaclepndihajndjjnb'>Download</a>
       </Step>
       <Step title='Step 2: Mint a Holo' complete={false}>

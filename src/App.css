@@ -2,9 +2,14 @@
   color:rgb(216 47 141);
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 } */
-h1, h2, h3, h4, h5 {
+h2, h3, h4, h5 {
   font-family: "Bebas Neue", sans-serif;
 }
+
+h1 {
+  font-family:'PressStart2P-Regular', Times, serif
+}
+
 .bg {
   background-color: black;
   color: white;
@@ -62,10 +67,13 @@ h1, h2, h3, h4, h5 {
   cursor: not-allowed;
 }
 
+
 @font-face {
   font-family: 'Bebas Neue';
   src: url('./fonts/Bebas_Neue/BebasNeue-Regular.ttf');
-  /* font-weight: 600; */
-  /* font-style: normal; */
-  /* font-display: swap; */
+}
+
+@font-face {
+  font-family: 'PressStart2P-Regular';
+  src: url('./fonts/Press_Start_2P/PressStart2P-Regular.ttf');
 }
