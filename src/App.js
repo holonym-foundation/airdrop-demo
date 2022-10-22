@@ -26,7 +26,7 @@ window.ethereum.request({
  * Technically, this method will give a result less than 2^(31*8), but that's fine and easier to write.
 */
 const ACTION_ID = '347604633508571055920698422800901142976661405457677528516203995392204277282';
-const THIS_URL = 'http://localhost:3001';
+const THIS_URL = 'https://airdrop-demo.holonym.io';
 
 // See whether address has proven uniquness for this action yet:
 async function isUnique(address) {
