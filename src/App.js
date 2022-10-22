@@ -19,16 +19,39 @@ window.ethereum.request({
   ],
 });
 
+/* ACTION_ID is a unique identifier for the action that should be sybil resistant, e.g. airdrop claiming. 
+ * This should be a unique value for this particular airdrop, not unique per user.
+ * This should be a random number less than 21888242871839275222246405745257275088548364400416034343698204186575808495617
+ * It can be generated once by BigInt('0x' + crypto.randomBytes(31).toString('hex')).toString()
+ * Technically, this method will give a result less than 2^(31*8), but that's fine and easier to write.
+*/
+const ACTION_ID = '447604633508571055920698422800901142976661405457677528516203995392204277282';
+
+// See whether address has proven uniquness for this action yet:
+async function isUnique(address) {
+  const resp = await fetch(`https://api.holonym.io/sybil-resistance?user=${address}&action-id=${ACTION_ID}`);
+  const { result: isUnique } = await resp.json();
+  return isUnique;
+}
+
 function App() {
   const [address, setAddress] = useState(null);
+  const [unique, setUnique] = useState(null);
   useEffect(()=>{
     async function f() {
       const address = (await window.ethereum.request({ method: "eth_requestAccounts" }))[0]
       setAddress(address);
-      console.log(address);
     }
     f();
-  })
+  }, [address]);
+
+  useEffect(()=>{
+    async function f() {
+      if(!address)return;
+      setUnique(await isUnique(address));
+    }
+    f();
+  }, [address]);
     
   return (
     <div className='bg'>
@@ -37,7 +60,7 @@ function App() {
       <a target='_blank' className='step button' href='https://chrome.google.com/webstore/detail/holonym/obhgknpelgngeabaclepndihajndjjnb'>Download</a>
       </Step>
       <Step title='Step 2: Mint a Holo' complete={false}>
-        <a target='_blank' className='step button' href='https://holonym.id/verify'>Get started</a>
+        <a target='_blank' className='step button' href='https://holonym.id/verify'>Mint</a>
       </Step>
       <Step title='Step 3: Prove uniquness' complete={false}>
       <a className='step button'>prove</a>
@@ -48,7 +71,7 @@ function App() {
       <br />
       <br />
 
-      <a className='action button disabled'>🪂</a>
+      <a className={'action button ' + (unique ? null : 'disabled')}>🪂</a>
       
       
     </div>
