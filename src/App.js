@@ -25,7 +25,7 @@ window.ethereum.request({
  * It can be generated once by BigInt('0x' + crypto.randomBytes(31).toString('hex')).toString()
  * Technically, this method will give a result less than 2^(31*8), but that's fine and easier to write.
 */
-const ACTION_ID = '447604633508571055920698422800901142976661405457677528516203995392204277282';
+const ACTION_ID = '347604633508571055920698422800901142976661405457677528516203995392204277282';
 const THIS_URL = 'http://localhost:3001';
 
 // See whether address has proven uniquness for this action yet:
@@ -57,6 +57,8 @@ function App() {
   return (
     <div className='bg'>
       <h1>Collect your airdrop{address ? `,   ${address.slice(0,6)}...${address.slice(-2)}` : null}</h1>
+      <br />
+      <br />
       <Step title='Step 1: Download the Holonym Extension' complete={true}>
       <a target='_blank' className='step button' href='https://chrome.google.com/webstore/detail/holonym/obhgknpelgngeabaclepndihajndjjnb'>Download</a>
       </Step>
@@ -72,7 +74,11 @@ function App() {
       <br />
       <br />
 
-      <a className={'action button ' + (unique ? null : 'disabled')}>🪂</a>
+      <a className={'action button ' + (unique ? null : 'disabled')}
+        onClick={()=>alert('airdrop!')
+      }>
+        🪂
+      </a>
       
       
     </div>
