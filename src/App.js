@@ -26,6 +26,7 @@ window.ethereum.request({
  * Technically, this method will give a result less than 2^(31*8), but that's fine and easier to write.
 */
 const ACTION_ID = '447604633508571055920698422800901142976661405457677528516203995392204277282';
+const THIS_URL = 'http://localhost:3001';
 
 // See whether address has proven uniquness for this action yet:
 async function isUnique(address) {
@@ -63,7 +64,7 @@ function App() {
         <a target='_blank' className='step button' href='https://holonym.id/verify'>Mint</a>
       </Step>
       <Step title='Step 3: Prove uniquness' complete={false}>
-      <a className='step button'>prove</a>
+      <a className='step button' href={`https://holonym.io/prove/uniqueness/${ACTION_ID}/${encodeURIComponent(THIS_URL)}`}>prove</a>
       </Step>
       
       <br />
